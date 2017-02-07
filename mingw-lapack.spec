@@ -61,21 +61,31 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %files -n mingw32-lapack
 %{mingw32_bindir}/libblas.dll
 %{mingw32_bindir}/liblapack.dll
+%{mingw32_bindir}/liblapacke.dll
+%{mingw32_includedir}/lapacke*.h
 %{mingw32_libdir}/libblas.dll.a
 %{mingw32_libdir}/liblapack.dll.a
-%{mingw32_libdir}/pkgconfig/lapack.pc
+%{mingw32_libdir}/liblapacke.dll.a
 %{mingw32_libdir}/pkgconfig/blas.pc
+%{mingw32_libdir}/pkgconfig/lapack.pc
+%{mingw32_libdir}/pkgconfig/lapacke.pc
 %{mingw32_libdir}/cmake/lapack-%{version}/
+%{mingw32_libdir}/cmake/lapacke-%{version}/
 
 # Win64
 %files -n mingw64-lapack
 %{mingw64_bindir}/libblas.dll
 %{mingw64_bindir}/liblapack.dll
+%{mingw64_bindir}/liblapacke.dll
+%{mingw64_includedir}/lapacke*.h
 %{mingw64_libdir}/libblas.dll.a
 %{mingw64_libdir}/liblapack.dll.a
-%{mingw64_libdir}/pkgconfig/lapack.pc
+%{mingw64_libdir}/liblapacke.dll.a
 %{mingw64_libdir}/pkgconfig/blas.pc
+%{mingw64_libdir}/pkgconfig/lapack.pc
+%{mingw64_libdir}/pkgconfig/lapacke.pc
 %{mingw64_libdir}/cmake/lapack-%{version}/
+%{mingw64_libdir}/cmake/lapacke-%{version}/
 
 %changelog
 * Wed Feb 08 2017 Jajauma's Packages <jajauma@yandex.ru> - 3.7.0-2.git20170208.d8574a9
