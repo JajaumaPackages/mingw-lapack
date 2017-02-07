@@ -8,10 +8,10 @@ Summary:        MinGW port of Linear Algebra PACKage
 License:        BSD
 URL:            http://www.netlib.org/lapack/
 Source0:        http://www.netlib.org/lapack/lapack-%{version}.tgz
-Patch0:         lapack-dont-force-release-build-type.patch
+Patch0:         lapack-3.7.0-skip-cmake-build-type.patch
 
-BuildRequires:  mingw32-filesystem >= 95
-BuildRequires:  mingw64-filesystem >= 95
+BuildRequires:  mingw32-filesystem
+BuildRequires:  mingw64-filesystem
 BuildRequires:  mingw32-gcc
 BuildRequires:  mingw64-gcc
 BuildRequires:  mingw32-gcc-gfortran
@@ -45,7 +45,7 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %patch0 -p1
 
 %build
-%mingw_cmake -DBUILD_TESTING=OFF
+%mingw_cmake
 %mingw_make %{?_smp_mflags}
 
 %install
@@ -55,10 +55,10 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %files -n mingw32-lapack
 %{mingw32_bindir}/libblas.dll
 %{mingw32_bindir}/liblapack.dll
-# %{mingw32_bindir}/libtmglib.dll
+%{mingw32_bindir}/libtmglib.dll
 %{mingw32_libdir}/libblas.dll.a
 %{mingw32_libdir}/liblapack.dll.a
-# %{mingw32_libdir}/libtmglib.dll.a
+%{mingw32_libdir}/libtmglib.dll.a
 %{mingw32_libdir}/pkgconfig/lapack.pc
 %{mingw32_libdir}/pkgconfig/blas.pc
 %{mingw32_libdir}/cmake/lapack-%{version}/
@@ -67,10 +67,10 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %files -n mingw64-lapack
 %{mingw64_bindir}/libblas.dll
 %{mingw64_bindir}/liblapack.dll
-# %{mingw64_bindir}/libtmglib.dll
+%{mingw64_bindir}/libtmglib.dll
 %{mingw64_libdir}/libblas.dll.a
 %{mingw64_libdir}/liblapack.dll.a
-# %{mingw64_libdir}/libtmglib.dll.a
+%{mingw64_libdir}/libtmglib.dll.a
 %{mingw64_libdir}/pkgconfig/lapack.pc
 %{mingw64_libdir}/pkgconfig/blas.pc
 %{mingw64_libdir}/cmake/lapack-%{version}/
