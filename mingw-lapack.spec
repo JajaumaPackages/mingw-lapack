@@ -1,13 +1,19 @@
 %?mingw_package_header
 
+%global commit d8574a9
+%global snapshot .git20170208.%{commit}
+
 Name:           mingw-lapack
 Version:        3.7.0
-Release:        1%{?dist}
+Release:        2%{snapshot}%{?dist}
 Summary:        MinGW port of Linear Algebra PACKage
 
 License:        BSD
 URL:            http://www.netlib.org/lapack/
-Source0:        http://www.netlib.org/lapack/lapack-%{version}.tgz
+# git clone https://github.com/Reference-LAPACK/lapack
+# cd lapack
+# git archive --prefix=lapack/ master | bzip2 >../lapack.tar.bz2
+Source0:        lapack.tar.bz2
 Patch0:         lapack-3.7.0-skip-cmake-build-type.patch
 
 BuildRequires:  mingw32-filesystem
@@ -41,11 +47,11 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %?mingw_debug_package
 
 %prep
-%setup -qn lapack-%{version}
+%setup -qn lapack
 %patch0 -p1
 
 %build
-%mingw_cmake
+%mingw_cmake -DLAPACKE=ON -DBUILD_TESTING=OFF
 %mingw_make %{?_smp_mflags}
 
 %install
@@ -55,10 +61,8 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %files -n mingw32-lapack
 %{mingw32_bindir}/libblas.dll
 %{mingw32_bindir}/liblapack.dll
-%{mingw32_bindir}/libtmglib.dll
 %{mingw32_libdir}/libblas.dll.a
 %{mingw32_libdir}/liblapack.dll.a
-%{mingw32_libdir}/libtmglib.dll.a
 %{mingw32_libdir}/pkgconfig/lapack.pc
 %{mingw32_libdir}/pkgconfig/blas.pc
 %{mingw32_libdir}/cmake/lapack-%{version}/
@@ -67,14 +71,17 @@ Summary:        64-bit version of Linear Algebra PACKage for Windows
 %files -n mingw64-lapack
 %{mingw64_bindir}/libblas.dll
 %{mingw64_bindir}/liblapack.dll
-%{mingw64_bindir}/libtmglib.dll
 %{mingw64_libdir}/libblas.dll.a
 %{mingw64_libdir}/liblapack.dll.a
-%{mingw64_libdir}/libtmglib.dll.a
 %{mingw64_libdir}/pkgconfig/lapack.pc
 %{mingw64_libdir}/pkgconfig/blas.pc
 %{mingw64_libdir}/cmake/lapack-%{version}/
 
 %changelog
+* Wed Feb 08 2017 Jajauma's Packages <jajauma@yandex.ru> - 3.7.0-2.git20170208.d8574a9
+- Rebase to git snapshot
+- Enable LAPACKE (build fixed in git snapshot)
+- Disable testing
+
 * Tue Feb 07 2017 Jajauma's Packages <jajauma@yandex.ru> - 3.7.0-1
 - Initial release
